@@ -1,0 +1,77 @@
+.main {
+  height: 100%;
+}
+
+.section {
+  height: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.me {
+  width: 15rem;
+  margin-top: 2rem;
+  height: 15rem;
+}
+
+.me > img {
+  max-height: 100%;
+  border-radius: 50%;
+  box-shadow: 0 4px 4px #000;
+}
+
+.headline {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.subline {
+  text-align: center;
+}
+
+.desc {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.floatingNavBtn {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 50%;
+  box-shadow: 0px 2px 2px #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.floatingNavBtn > div {
+  width: 60%;
+  height: 5%;
+  margin: 5% 0;
+  background-color: black;
+  position: relative;
+}
+
+.floatingNavBtn > div:before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -10px;
+  background: black;
+  left: 0;
+}
+
+.floatingNavBtn > div:after {
+  bottom: -10px;
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: black;
+  left: 0;
+}

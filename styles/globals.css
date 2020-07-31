@@ -1,9 +1,37 @@
+:root {
+  --dark: #222831;
+  --light: #eeeeee;
+}
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.app {
+  height: 100vh;
+}
+
+.dark {
+  background-color: var(--dark);
+}
+
+.dark-text {
+  color: var(--dark);
+}
+
+.light-text {
+  color: var(--light)
+}
+
+.light {
+  background-color: var(--light);
+}
+
+img {
+  max-width: 100%;
 }
 
 a {
@@ -13,4 +41,6 @@ a {
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
