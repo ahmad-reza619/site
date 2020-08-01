@@ -2,8 +2,17 @@ import { useMemo } from 'react';
 import { createStore, Store, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+import rootReducer from './reducers';
+import { initialState as themeState } from './reducers/themeReducer'; 
+
+const initialState: RootState = {
+  theme: themeState,
+}
+
 export interface RootState {
-  isDark: boolean;
+  theme: {
+    isDark: boolean;
+  }
 }
 
 interface BaseActionType {
@@ -12,25 +21,9 @@ interface BaseActionType {
 
 let store: Store<RootState, BaseActionType>;
 
-const initialState: RootState = {
-  isDark: true,
-};
-
-const reducer = (state = initialState, action: BaseActionType) => {
-  switch (action.type) {
-    case 'TOGGLE_ISDARK':
-      return {
-        ...state,
-        isDark: !state.isDark,
-      };
-    default:
-      return state;
-  }
-}
-
-function initStore(preloadedState = initialState) {
+function initStore(preloadedState: RootState = initialState) {
   return createStore(
-    reducer,
+    rootReducer,
     preloadedState,
     composeWithDevTools(
       applyMiddleware()
