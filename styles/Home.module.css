@@ -3,26 +3,54 @@
 }
 
 .section {
-  height: 45%;
+  height: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .me {
-  width: 15rem;
-  margin-top: 2rem;
-  height: 15rem;
+  width: 10rem;
+  height: 10rem;
 }
 
 .me > img {
   max-height: 100%;
   border-radius: 50%;
-  box-shadow: 0 4px 4px #000;
+}
+
+.darkModeWrapper {
+  height: 3rem;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.darkModeWrapper > .darkMode {
+  height: 30px;
+  width: 30px;
+  border: 1px solid white;
+  background: black;
+  border-radius: 50%;
+  margin: 5px 10px;
+  overflow: hidden;
+}
+
+.darkModeWrapper > .darkMode > .darkModeInner {
+  width: 100%;
+  transition: all .5s;
+  height: 100%;
+  background: white;
+  transform: translateX(-50%)
+}
+
+.darkModeWrapper > .darkMode > .lightModeInner {
+  transform: translateX(50%);
 }
 
 .headline {
   text-align: center;
+  font-weight: bolder;
   margin: 1rem 0;
 }
 
@@ -33,6 +61,7 @@
 .desc {
   text-align: center;
   margin: 2rem 0;
+  padding: 0 2rem;
 }
 
 .floatingNavBtn {
@@ -40,29 +69,34 @@
   bottom: 1rem;
   right: 1rem;
   height: 3.5rem;
+  background: linear-gradient(to top,#6a2c70 ,#b83b5e);
+  border: none;
   width: 3.5rem;
   border-radius: 50%;
-  box-shadow: 0px 2px 2px #000;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all .5s linear;
+  outline: none;
 }
 
 .floatingNavBtn > div {
   width: 60%;
-  height: 5%;
+  transition: all .5s linear;
+  height: 7%;
   margin: 5% 0;
-  background-color: black;
+  background-color: white;
   position: relative;
 }
 
 .floatingNavBtn > div:before {
   content: '';
+  transition: all .5s linear;
   width: 100%;
   height: 100%;
   position: absolute;
   top: -10px;
-  background: black;
+  background: inherit;
   left: 0;
 }
 
@@ -72,6 +106,42 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  background: black;
+  background: inherit;
   left: 0;
+}
+.active {
+  right: calc(100% - 5rem);
+}
+.active > div {
+  transform: rotate(405deg);
+}
+
+.active > div:before {
+  transform: rotate(270deg);
+  top: 0;
+}
+.active > div:after {
+  display: none;
+}
+.nav {
+  /* TODO: nanti display none dihapus & implementasi sidebar mobile */
+  display: none;
+  height: 100%;
+  width: calc(100% - 5.5rem);
+  position: fixed;
+  right: 0;
+  border-radius: 10px 0 0 10px;
+  padding: 3rem 0;
+  background: linear-gradient(to top, #6a2c70, #b83b5e);
+  z-index: 1;
+}
+
+.nav > ul {
+  list-style-type: none;
+  color: white;
+}
+
+.nav > ul > li {
+  margin: 1.5rem 0;
+  padding: 1rem;
 }
