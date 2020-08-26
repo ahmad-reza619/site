@@ -59,13 +59,19 @@ export default function Home() {
         <section className={classes.social}>
           <div className={classes.socialInner}>
             <Text>
-              <FontAwesomeIcon icon={faTwitter} size="lg" />
+              <a href="https://twitter.com/HungryDev1" target="_blank">
+                <FontAwesomeIcon icon={faTwitter} size="lg" />
+              </a>
             </Text>
             <Text>
-              <FontAwesomeIcon icon={faGithub} size="lg" />
+              <a href="https://github.com/ahmad-reza619" target="_blank">
+                <FontAwesomeIcon icon={faGithub} size="lg" />
+              </a>
             </Text>
             <Text>
-              <FontAwesomeIcon icon={faLinkedin} size="lg" />
+              <a href="https://www.linkedin.com/in/ahmad-reza-68ab52170/" target="_blank">
+                <FontAwesomeIcon icon={faLinkedin} size="lg" />
+              </a>
             </Text>
           </div>
         </section>
