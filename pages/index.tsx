@@ -71,7 +71,7 @@ export default function Home() {
         </section>
         <section className={classes.other}>
           <div className={classes.fieldset}>
-            <label className={classes.legend}><Text><small>Latest Blog Post</small></Text></label>
+            <label className={`${classes.legend} ${isDark ? 'dark' : '' }`}><Text><small>Latest Blog Post</small></Text></label>
             <div>
               <Text>How To become ugly bastard</Text>
             </div>

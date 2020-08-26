@@ -1,4 +1,4 @@
-import { TOGGLE_ISDARK, ToggleIsDarkAction } from '../actions';
+import { TOGGLE_ISDARK, ToggleIsDarkAction } from '../../actions';
 
 interface Theme {
   isDark: boolean;
