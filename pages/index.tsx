@@ -53,8 +53,8 @@ export default function Home() {
         </div>
       </section>
       <section className={classes.other}>
-        <div className={classes.fieldset}>
-          <label className={`${classes.legend} ${isDark ? 'dark' : '' }`}><Text><small>Latest Blog Post</small></Text></label>
+        <div className={classes.fieldset} style={{ border: isDark ? '2px solid white' : '2px solid black' }}>
+          <label className={`${classes.legend} ${isDark ? 'dark' : 'light' }`}><Text><small>Latest Blog Post</small></Text></label>
           <div>
             <Text>How To become ugly bastard</Text>
           </div>
