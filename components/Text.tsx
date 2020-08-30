@@ -1,8 +1,22 @@
+import React from 'react';
 import { useIsDark } from '../hooks';
 
-function Text({ children }: { children: any }) {
+interface TextProps {
+  as: React.ElementType | React.ComponentType
+  children: any
+  [other: string]: any
+}
+
+function Text(props: TextProps) {
   const [isDark] = useIsDark();
-  return <span className={isDark ? 'light-text' : 'dark-text'}>{children}</span>;
+
+  const { as, children, ...other } = props;
+
+  return React.createElement(
+    as,
+    { className: isDark ? 'light-text' : 'dark-text', ...other },
+    children,
+  )
 }
 
 export default Text;
