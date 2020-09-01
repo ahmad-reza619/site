@@ -74,7 +74,7 @@
   bottom: 1rem;
   right: 1rem;
   height: 3.5rem;
-  background: linear-gradient(to top,#6a2c70 ,#b83b5e);
+  background: linear-gradient(to top,#222 ,#000);
   border: none;
   width: 3.5rem;
   border-radius: 50%;
@@ -136,7 +136,6 @@
   right: 0;
   border-radius: 10px 0 0 10px;
   padding: 3rem 0;
-  background: #1e1e1e;
   z-index: 1;
 }
 
@@ -164,6 +163,9 @@
 
 .nav > ul > li.selected {
   background: #000;
+}
+.nav > ul > li.selectedLight {
+  background: #f5deb3;
 }
 .activeNav {
   width: calc(100% - 5.5rem);
@@ -197,11 +199,13 @@
   padding: .8rem;
   position: relative;
   max-width: 70%;
+  min-width: 40%;
 }
 
 .legend {
   position: absolute;
-  top: -12px;
+  top: -30%;
+  left: 0;
 }
 
 .logo {

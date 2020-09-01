@@ -12,9 +12,11 @@ function Text(props: TextProps) {
 
   const { as, children, className, ...other } = props;
 
+  const classN = className ?? '';
+
   return React.createElement(
     as || 'span',
-    { className: isDark ? `light-text ${className}` : `dark-text ${className}`, ...other },
+    { className: isDark ? `light-text ${classN}` : `dark-text ${classN}`, ...other },
     children,
   )
 }

@@ -1,13 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import fs from 'fs';
 
 import classes from '../styles/Home.module.css';
 import Text from '../components/Text';
 import Layout from '../components/Layout';
 import { useIsDark } from '../hooks';
 
-export default function Home() {
+export default function Home({ newestBlog }) {
   const [ isDark ] = useIsDark();
   return (
     <Layout>
@@ -54,10 +55,21 @@ export default function Home() {
         <div className={classes.fieldset} style={{ border: isDark ? '2px solid white' : '2px solid black' }}>
           <label className={`${classes.legend} ${isDark ? 'dark' : 'light' }`}><Text><small>Latest Blog Post</small></Text></label>
           <div>
-            <Text>How To become ugly bastard</Text>
+            <Text>{newestBlog}</Text>
           </div>
         </div>
       </section>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const files = fs
+    .readdirSync(`${process.cwd()}/contents/blog`)
+  const lastDir = files[files.length - 1]; 
+  return {
+    props: {
+      newestBlog: lastDir.toString(),
+    },
+  };
 }

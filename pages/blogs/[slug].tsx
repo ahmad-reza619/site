@@ -7,6 +7,10 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Text from '../../components/Text';
 import Layout from '../../components/Layout';
 
+function Paragraph({ children }) {
+  return <p style={{ padding: '1em 0' }}>{children}</p>
+}
+
 function CodeBlock({ language, value }) {
   return <SyntaxHighlighter language={language}>{value}</SyntaxHighlighter>
 }
@@ -14,15 +18,20 @@ function CodeBlock({ language, value }) {
 export default function BlogPost({ content, frontmatter }) {
   return (
     <Layout title={frontmatter.title}>
-      <Text as="article" style={{ padding: '1rem' }}>
-        <ReactMarkdown
-          escapeHtml={false}
-          source={content}
-          renderers={{
-            code: CodeBlock,
-          }}
-        />
-      </Text>
+      <section style={{ padding: '1em 1.5em' }}>
+        <Text as="h1">{frontmatter.title}</Text>
+        <Text as="p" style={{ paddingBottom: '1rem' }}>{frontmatter.date}</Text>
+        <Text as="article">
+          <ReactMarkdown
+            escapeHtml={false}
+            source={content}
+            renderers={{
+              code: CodeBlock,
+              paragraph: Paragraph,
+            }}
+          />
+        </Text>
+      </section>
     </Layout>
   );
 }
@@ -60,7 +69,7 @@ export async function getStaticProps({ params: { slug } }){
 
   return {
     props: {
-      content: `# ${data.title} \n${content}`,
+      content,
       frontmatter,
     }
   };

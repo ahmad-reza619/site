@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPencilAlt, faPhone } from '@fortawesome/free-solid-svg-icons';
 
+import Text from '../components/Text';
+import { useIsDark } from '../hooks'
 import classes from '../styles/Home.module.css';
 
 interface SidebarProps {
@@ -11,22 +13,25 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen }: SidebarProps) {
   const router = useRouter();
+  const [isDark] = useIsDark();
+
+  const classLiSelected = isDark ? classes.selected : classes.selectedLight;
   return (
-    <nav className={` ${isOpen ? classes.activeNav : ''} ${classes.nav}`}>
+    <nav className={` ${isOpen ? classes.activeNav : ''} ${isDark ? 'dark' : 'light'} ${classes.nav}`}>
       <ul>
         <Link href="/">
-          <li className={router.pathname === '/' ? classes.selected : ''}>
+          <Text as="li" className={router.pathname === '/' ? classLiSelected : ''}>
             <FontAwesomeIcon icon={faHome} size="2x" className={classes.icon} />Home
-          </li>
+          </Text>
         </Link>
         <Link href="/blogs">
-          <li className={router.pathname === '/blogs' ? classes.selected : ''}>
+          <Text as="li" className={router.pathname === '/blogs' ? classLiSelected : ''}>
             <FontAwesomeIcon icon={faPencilAlt} size="2x" className={classes.icon} />Blog
-          </li>
+          </Text>
         </Link>
-        <li className={router.pathname === '/contact' ? classes.selected : ''}>
+        <Text as="li" className={router.pathname === '/contact' ? classLiSelected : ''}>
           <FontAwesomeIcon icon={faPhone} size="2x" className={classes.icon} />Contact
-        </li>
+        </Text>
       </ul>
     </nav>
   )
