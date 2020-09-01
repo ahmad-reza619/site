@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 import Sidebar from './Sidebar';
 import { useIsDark, useToggle } from '../hooks';
@@ -7,7 +8,7 @@ import classes from '../styles/Home.module.css';
 
 interface LayoutProps {
   children: any;
-  title: string;
+  title?: string;
 }
 
 export default function Layout({
@@ -28,9 +29,11 @@ export default function Layout({
       />
       <main>
         <div className={classes.darkModeWrapper}>
-          <div className={classes.logo}>
-            <img src="/owlsvg.png" />
-          </div>
+          <Link href="/">
+            <div className={classes.logo}>
+              <img src="/owlsvg.png" />
+            </div>
+          </Link>
           <div className={classes.darkMode} onClick={toggle}>
             <div className={`${classes.darkModeInner} ${isDark ? classes.lightModeInner : ''}`} />
           </div>

@@ -17,11 +17,9 @@ export default function Home() {
         </div>
       </section>
       <section>
-        <h1 className={classes.headline}>
-          <Text>
-            Ahmad Reza
-          </Text>
-        </h1>
+        <Text as="h1" className={classes.headline}>
+          Ahmad Reza
+        </Text>
         <h4 className={classes.subline}>
           <Text>Frontend Software Engineer</Text>
         </h4>
