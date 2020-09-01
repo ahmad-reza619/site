@@ -28,7 +28,7 @@ export default function Home({ newestBlog }) {
       <section>
         <p className={classes.desc}>
           <Text>
-            React · Next JS · Gatsby JS · Freetime Open Sourcerer · 19yo
+            React · Next JS · Gatsby JS · Freetime Open Sourcerer · {(new Date()).getFullYear() - 2000}yo
           </Text>
         </p>
       </section>

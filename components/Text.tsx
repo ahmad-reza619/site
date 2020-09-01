@@ -7,7 +7,7 @@ interface TextProps {
   [other: string]: any
 }
 
-function Text(props: TextProps) {
+const Text = React.forwardRef((props: TextProps, ref) => {
   const [isDark] = useIsDark();
 
   const { as, children, className, ...other } = props;
@@ -16,9 +16,13 @@ function Text(props: TextProps) {
 
   return React.createElement(
     as || 'span',
-    { className: isDark ? `light-text ${classN}` : `dark-text ${classN}`, ...other },
+    {
+      className: isDark ? `light-text ${classN}` : `dark-text ${classN}`,
+      ref,
+      ...other,
+    },
     children,
   )
-}
+})
 
 export default Text;

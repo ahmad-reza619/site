@@ -29,9 +29,11 @@ export default function Sidebar({ isOpen }: SidebarProps) {
             <FontAwesomeIcon icon={faPencilAlt} size="2x" className={classes.icon} />Blog
           </Text>
         </Link>
-        <Text as="li" className={router.pathname === '/contact' ? classLiSelected : ''}>
-          <FontAwesomeIcon icon={faPhone} size="2x" className={classes.icon} />Contact
-        </Text>
+        <Link href="/contact">
+          <Text as="li" className={router.pathname === '/contact' ? classLiSelected : ''}>
+            <FontAwesomeIcon icon={faPhone} size="2x" className={classes.icon} />Contact
+          </Text>
+        </Link>
       </ul>
     </nav>
   )

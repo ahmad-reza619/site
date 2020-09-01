@@ -204,8 +204,8 @@
 
 .legend {
   position: absolute;
-  top: -30%;
-  left: 0;
+  top: -.8rem;
+  left: 1em;
 }
 
 .logo {
