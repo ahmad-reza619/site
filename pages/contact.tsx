@@ -31,7 +31,7 @@ export default function Contact(){
       <div className={classes.container}>
         <Text as="h1">Contact Me</Text>
         {data.map((d) => (
-          <div className={classes.contactLinkCard}>
+          <div className={classes.contactLinkCard} key={d.title}>
             <Text className={classes.iconWrapper}>
               <FontAwesomeIcon icon={d.icon} size="6x" className={classes.icon} />
             </Text>

@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import ReactMarkdown from 'react-markdown/with-html';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
+import classes from '../../styles/Blogs.module.css';
 import Text from '../../components/Text';
 import Layout from '../../components/Layout';
 
@@ -18,7 +19,7 @@ function CodeBlock({ language, value }) {
 export default function BlogPost({ content, frontmatter }) {
   return (
     <Layout title={frontmatter.title}>
-      <section style={{ padding: '1em 1.5em' }}>
+      <section className={classes.blogContent}>
         <Text as="h1">{frontmatter.title}</Text>
         <Text as="p" style={{ paddingBottom: '1rem' }}>{frontmatter.date}</Text>
         <Text as="article">
