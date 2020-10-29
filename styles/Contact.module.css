@@ -2,17 +2,10 @@
   padding: 1em 1.5em;
 }
 
-.contactLinkCard {
-  display: flex;
-  justify-content: space-around; 
-}
-
-.iconWrapper {
-  width: 6em;
-}
-
-.icon {
-  max-width: 100%;
+.contactLinks {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
 }
 
 .contactLinkCardContent {
