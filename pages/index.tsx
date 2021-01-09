@@ -2,6 +2,10 @@ import { useRef, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
+  useColorModeValue,
+  useColorMode,
+  Button,
+  Spacer,
   Stack,
   HStack,
   Center,
@@ -10,13 +14,17 @@ import {
   Heading
 } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitter, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faTwitter, faGithub, faLinkedin  } from '@fortawesome/free-brands-svg-icons';
+import { faMoon } from '@fortawesome/free-solid-svg-icons';
 
 import fs from 'fs';
 import matter from 'gray-matter';
-import gsap, { Quad,  } from 'gsap';
+import gsap  from 'gsap';
 
 export default function Home({ posts }) {
+  const { toggleColorMode } = useColorMode();
+  const color = useColorModeValue("gray", "black");
+
   const refTitle = useRef(null);
   const refSub = useRef(null);
   const refDesc = useRef(null);
@@ -40,14 +48,14 @@ export default function Home({ posts }) {
     return () => {
       gsap
         .timeline()
-        .to(refPosts.current[index], { background: 'black', color: 'white' });
+        .to(refPosts.current[index], { background: color });
     }
   }
   function leavePost(index) {
     return () => {
       gsap
         .timeline()
-        .to(refPosts.current[index], { background: 'initial', color: 'black' });
+        .to(refPosts.current[index], { background: 'initial' });
     }
   }
   return (
@@ -70,9 +78,15 @@ export default function Home({ posts }) {
                 <Image
                   src="/owlsvg.png"
                   boxSize="40px"
-                  alt="Go to home"
+                  alt="Logo"
                 />
                 <Box>Hungry Dev</Box>
+                <Spacer />
+                <Button
+                  onClick={toggleColorMode}
+                >
+                  <FontAwesomeIcon icon={faMoon} />
+                </Button>
               </HStack>
             </Link>
           </Box>
