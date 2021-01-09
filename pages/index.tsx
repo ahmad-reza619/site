@@ -56,7 +56,7 @@ export default function Home({ posts }) {
         <title>Ahmad Reza Personal Web</title>
       </Head>
       <Stack
-        direction={["column", "row"]}
+        direction={{ base: 'column', md: 'row' }}
         padding=".5rem 1rem"
         width="100%"
         minH="100vh"
