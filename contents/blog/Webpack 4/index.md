@@ -37,4 +37,4 @@ The default value is `./src/index.js`.
 
 You can take a look more about this options in [Documentation](https://webpack.js.org/concepts/entry-points/).
 
-### Output
+... Please wait still writing
