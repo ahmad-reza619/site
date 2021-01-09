@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import {
   useColorModeValue,
   useColorMode,
@@ -20,6 +21,8 @@ import { faMoon } from '@fortawesome/free-solid-svg-icons';
 import fs from 'fs';
 import matter from 'gray-matter';
 import gsap  from 'gsap';
+
+const MusicPlayer = dynamic(() => import('../components/MusicPlayer'), { ssr: false });
 
 export default function Home({ posts }) {
   const { toggleColorMode } = useColorMode();
@@ -121,6 +124,7 @@ export default function Home({ posts }) {
           </Center>
         </Box>
         <Box as="section" ref={refBlogSection}>
+          <MusicPlayer />
           <Heading as="h2" p="0 1rem" mb=".8rem">📖 Blogs</Heading>
           <Stack direction="column" spacing="1em">
             {posts.map(({ frontmatter: { title, description, date } }, index) => (
