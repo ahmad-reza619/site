@@ -35,6 +35,7 @@ export default function Blog({ content, frontmatter }) {
           renderers={{
             code: CodeBlock,
             paragraph: Paragraph,
+            heading: Heading,
           }}
         />
       </Box>
