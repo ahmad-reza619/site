@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
@@ -13,8 +14,42 @@ import { faTwitter, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-ic
 
 import fs from 'fs';
 import matter from 'gray-matter';
+import gsap, { Quad,  } from 'gsap';
 
 export default function Home({ posts }) {
+  const refTitle = useRef(null);
+  const refSub = useRef(null);
+  const refDesc = useRef(null);
+  useEffect(() => {
+    gsap
+      .timeline()
+      .from(refTitle.current, { y: '1em', duration: .5 })
+      .from(refSub.current, { y: '1em', duration: .5 })
+      .from(refDesc.current, { y: '100%', duration: .5 })
+  }, []);
+
+  const refPosts = useRef([]);
+  const refBlogSection = useRef(null);
+  useEffect(() => {
+    const tl = gsap.timeline();
+    tl.from(refBlogSection.current, { y: -10, duration: 1 });
+    refPosts.current.map(refPost => tl.from(refPost, { y: 20, opacity: 0, duration: .8, stagger: .4 }))
+  }, []);
+
+  function hoverPost(index) {
+    return () => {
+      gsap
+        .timeline()
+        .to(refPosts.current[index], { background: 'black', color: 'white' });
+    }
+  }
+  function leavePost(index) {
+    return () => {
+      gsap
+        .timeline()
+        .to(refPosts.current[index], { background: 'initial', color: 'black' });
+    }
+  }
   return (
     <>
       <Head>
@@ -24,6 +59,7 @@ export default function Home({ posts }) {
         direction={["column", "row"]}
         padding=".5rem 1rem"
         width="100%"
+        minH="100vh"
         justify="space-evenly"
         spacing="24px"
       >
@@ -31,50 +67,68 @@ export default function Home({ posts }) {
           <Box>
             <Link href="/">
               <HStack>
-                <Image src="/owlsvg.png" boxSize="40px" alt="Go to home" />
+                <Image
+                  src="/owlsvg.png"
+                  boxSize="40px"
+                  alt="Go to home"
+                />
                 <Box>Hungry Dev</Box>
               </HStack>
             </Link>
           </Box>
-          <Center>
+          <Center height="100%">
             <Stack direction="column" align="center">
-              <Image src="me.jpg" boxSize="200px" borderRadius="full" />
-              <Heading as="h1">Ahmad Reza</Heading>
-              <Heading as="h2" size="md">
-                Frontend Software Engineer
-              </Heading>
-              <Box as="p" textAlign="center">
-                React · Next JS · Gatsby JS · Freetime Open Sourcerer · 21yo
+              <Image src="me.jpg" boxSize={{ base: 200, xl: 'full' }} borderRadius={{ base: 'full', xl: 'none' }} />
+              <Box overflow="hidden">
+                <Heading as="h1" ref={refTitle} >Ahmad Reza</Heading>
               </Box>
+              <Box overflow="hidden">
+                <Heading as="h2" size="md" ref={refSub}>
+                  Frontend Software Engineer
+                </Heading>
+              </Box>
+              <Box overflow="hidden">
+                <Box as="p" textAlign="center" ref={refDesc}>
+                  React · Next JS · Gatsby JS · Freetime Open Sourcerer · 21yo
+                </Box>
+              </Box>
+              <HStack spacing="1.5rem">
+                <a href="https://twitter.com/HungryDev1" target="_blank">
+                  <FontAwesomeIcon icon={faTwitter} size="lg" />
+                </a>
+                <a href="https://github.com/ahmad-reza619" target="_blank">
+                  <FontAwesomeIcon icon={faGithub} size="lg" />
+                </a>
+                <a href="https://www.linkedin.com/in/ahmad-reza-68ab52170/" target="_blank">
+                  <FontAwesomeIcon icon={faLinkedin} size="lg" />
+                </a>
+              </HStack>
             </Stack>
           </Center>
         </Box>
-        <Box as="section">
-          <Heading as="h2" mb=".8rem">Blogs</Heading>
+        <Box as="section" ref={refBlogSection}>
+          <Heading as="h2" p="0 1rem" mb=".8rem">📖 Blogs</Heading>
           <Stack direction="column" spacing="1em">
-            {posts.map(({ frontmatter: { title, description, date } }) => (
-              <Link href="/blog/[slug]" as={`/blog/${title}`}>
-                <Box as="article">
+            {posts.map(({ frontmatter: { title, description, date } }, index) => (
+              <Link key={title} href="/blog/[slug]" as={`/blog/${title}`}>
+                <Box
+                  ref={el => refPosts.current[index] = el}
+                  cursor="pointer"
+                  boxSizing="border-box"
+                  p="1rem"
+                  as="article"
+                  onMouseEnter={hoverPost(index)}
+                  onMouseLeave={leavePost(index)}
+                >
                   <Heading as="h3" size="md">{title}</Heading>
                   <Box as="small" >{date}</Box>
                   <Box as="p" >{description}</Box>
+                  <Box fill="black" w="100%" h="0"/>
                 </Box>
               </Link>
             ))}
           </Stack>
         </Box>
-        <HStack spacing="1.5rem">
-          <Heading as="h2" size="md">Contact Me</Heading>
-          <a href="https://twitter.com/HungryDev1" target="_blank">
-            <FontAwesomeIcon icon={faTwitter} size="lg" />
-          </a>
-          <a href="https://github.com/ahmad-reza619" target="_blank">
-            <FontAwesomeIcon icon={faGithub} size="lg" />
-          </a>
-          <a href="https://www.linkedin.com/in/ahmad-reza-68ab52170/" target="_blank">
-            <FontAwesomeIcon icon={faLinkedin} size="lg" />
-          </a>
-        </HStack>
       </Stack>
     </>
   );
