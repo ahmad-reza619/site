@@ -2,6 +2,7 @@
 title: Webpack 4 Guide
 date: 2020-10-29
 description: A guide for beginner around Webpack
+onprogress: true
 ---
 
 So recently, i've worked on upgrading and optimizing the codebase we have at Assist ID, it was a lot of learning and a lot of fun, so i decided to write something about it.

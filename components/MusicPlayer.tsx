@@ -24,7 +24,6 @@ export default function MusicPlayer() {
           cover: "f08dcc36e3a5439b5b53a0f45bfa83b3.png",
         },
       ],
-      autoplay: true,
       listFolded: true,
     });
     return function cleanup() {

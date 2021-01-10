@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import {
   useColorModeValue,
@@ -11,9 +12,9 @@ import {
   HStack,
   Center,
   Box,
-  Image,
   Heading
 } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faGithub, faLinkedin  } from '@fortawesome/free-brands-svg-icons';
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
@@ -24,7 +25,24 @@ import gsap  from 'gsap';
 
 const MusicPlayer = dynamic(() => import('../components/MusicPlayer'), { ssr: false });
 
-export default function Home({ posts }) {
+const MyImage = styled(Image)`
+  border-radius: 50%;
+`;
+
+interface Post {
+  frontmatter: {
+    title: string;
+    description: string;
+    date: string;
+    onprogress?: boolean;
+  }
+}
+
+interface Props {
+  posts: Post[],
+}
+
+export default function Home({ posts }: Props) {
   const { toggleColorMode } = useColorMode();
   const color = useColorModeValue("gray", "black");
 
@@ -69,7 +87,6 @@ export default function Home({ posts }) {
       <Stack
         direction={{ base: 'column', md: 'row' }}
         padding=".5rem 1rem"
-        width="100%"
         minH="100vh"
         justify="space-evenly"
         spacing="24px"
@@ -80,8 +97,9 @@ export default function Home({ posts }) {
               <HStack>
                 <Image
                   src="/owlsvg.png"
-                  boxSize="40px"
                   alt="Logo"
+                  width={40}
+                  height={40}
                 />
                 <Box>Hungry Dev</Box>
                 <Spacer />
@@ -95,7 +113,14 @@ export default function Home({ posts }) {
           </Box>
           <Center height="100%">
             <Stack direction="column" align="center">
-              <Image src="me.jpg" boxSize={{ base: 200, xl: 'full' }} borderRadius={{ base: 'full', xl: 'none' }} />
+              <MyImage
+                src="/me.jpg"
+                layout="intrinsic"
+                width={200}
+                height={200}
+                // boxSize={{ base: 200, xl: 'full' }}
+                // borderRadius={{ base: 'full', xl: 'none' }}
+              />
               <Box overflow="hidden">
                 <Heading as="h1" ref={refTitle} >Ahmad Reza</Heading>
               </Box>
@@ -126,9 +151,13 @@ export default function Home({ posts }) {
         <Box as="section" ref={refBlogSection}>
           <MusicPlayer />
           <Heading as="h2" p="0 1rem" mb=".8rem">📖 Blogs</Heading>
-          <Stack direction="column" spacing="1em">
+          <Stack overflow="auto" direction="column" spacing="1em">
             {posts.map(({ frontmatter: { title, description, date } }, index) => (
-              <Link key={title} href="/blog/[slug]" as={`/blog/${title}`}>
+              <Link
+                key={title}
+                href="/blog/[slug]"
+                as={`/blog/${title}`}
+              >
                 <Box
                   ref={el => refPosts.current[index] = el}
                   cursor="pointer"
