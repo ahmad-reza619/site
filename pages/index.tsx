@@ -1,7 +1,6 @@
 import { useRef, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import {
   useColorModeValue,
@@ -12,9 +11,9 @@ import {
   HStack,
   Center,
   Box,
-  Heading
+  Heading,
+  Image,
 } from '@chakra-ui/react';
-import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTwitter, faGithub, faLinkedin  } from '@fortawesome/free-brands-svg-icons';
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
@@ -24,10 +23,6 @@ import matter from 'gray-matter';
 import gsap  from 'gsap';
 
 const MusicPlayer = dynamic(() => import('../components/MusicPlayer'), { ssr: false });
-
-const MyImage = styled(Image)`
-  border-radius: 50%;
-`;
 
 interface Post {
   frontmatter: {
@@ -100,6 +95,7 @@ export default function Home({ posts }: Props) {
                   alt="Logo"
                   width={40}
                   height={40}
+                  boxSize="40px"
                 />
                 <Box>Hungry Dev</Box>
                 <Spacer />
@@ -113,13 +109,12 @@ export default function Home({ posts }: Props) {
           </Box>
           <Center height="100%">
             <Stack direction="column" align="center">
-              <MyImage
+              <Image
                 src="/me.jpg"
-                layout="intrinsic"
                 width={200}
                 height={200}
-                // boxSize={{ base: 200, xl: 'full' }}
-                // borderRadius={{ base: 'full', xl: 'none' }}
+                boxSize={{ base: 200, xl: 'full' }}
+                borderRadius={{ base: 'full', xl: 'none' }}
               />
               <Box overflow="hidden">
                 <Heading as="h1" ref={refTitle} >Ahmad Reza</Heading>
