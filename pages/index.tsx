@@ -126,7 +126,7 @@ export default function Home({ posts }: Props) {
               </Box>
               <Box overflow="hidden">
                 <Box as="p" textAlign="center" ref={refDesc}>
-                  React · Next JS · Gatsby JS · Freetime Open Sourcerer · 21yo
+                  React · Next JS · Gatsby JS · Freetime Open Sourcerer · 23yo
                 </Box>
               </Box>
               <HStack spacing="1.5rem">
